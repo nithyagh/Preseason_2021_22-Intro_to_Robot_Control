@@ -7,10 +7,10 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.TankDrive;
+import frc.robot.commands.TimedAuto;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -25,6 +25,8 @@ public class RobotContainer {
   private final Joystick _leftJoystick;
   private final Joystick _rightJoystick;
   private final TankDrive _tankDrive;
+  private final ArcadeDrive _arcadeDrive;
+  private final TimedAuto _timedAuto;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -33,6 +35,8 @@ public class RobotContainer {
     _leftJoystick = new Joystick(Constants.USBOrder.Zero);
     _rightJoystick = new Joystick(Constants.USBOrder.One);
     _tankDrive = new TankDrive(_driveTrain, _leftJoystick, _rightJoystick);
+    _arcadeDrive = new ArcadeDrive(_driveTrain, _leftJoystick);
+    _timedAuto = new TimedAuto(_driveTrain);
 
     _driveTrain.setDefaultCommand(_tankDrive);
 
@@ -45,7 +49,15 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+    boolean state = _leftJoystick.getRawButton(1);
+
+
+    if() {
+
+    }
+    
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -54,6 +66,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return null;
+    return _timedAuto;
   }
 }
